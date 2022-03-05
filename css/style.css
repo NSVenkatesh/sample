@@ -14,10 +14,14 @@ ul {
   list-style-type: none;
 }
 .main {
-  width: 650px;
+  max-width: 650px;
   margin: 0 auto;
   padding: 0 5px;
   overflow: hidden;
+}
+.user-name {
+  font-size: 25px;
+  text-align: center;
 }
 .input-sub {
   display: flex;
@@ -240,6 +244,7 @@ ul {
 }
 .post-input {
   padding: 5px;
+  overflow: hidden;
 }
 .p-img {
   background-color: black;
@@ -290,4 +295,35 @@ ul {
   visibility: visible;
   transition: 0.5s all;
   transform: translateY(0px);
+}
+@media only screen and (max-width: 600px) {
+  .main {
+    max-width: 650px;
+  }
+  .text-cover {
+    max-width: 75%;
+  }
+  .input-main {
+    max-width: 97%;
+  }
+  .list {
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+  }
+  .list li {
+    flex-direction: column;
+  }
+  .list li p {
+    font-size: 12px;
+  }
+  .text-area {
+    font-size: 20px;
+  }
+  .btn-gif {
+    padding: 10px 15px;
+  }
+  .gif-content {
+    width: 100%;
+  }
 }
