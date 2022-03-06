@@ -2,17 +2,17 @@ let count = 0;
 let countGif = 0;
 let searchInput;
 let searchUrl;
+let currentGif;
+let none = "";
 let inputHide = document.querySelector(".input-main");
 let gifHide = document.querySelector(".gif-search");
 let popup = document.querySelector(".text-cover");
 let setGif = document.querySelector(".set-gif");
 let userName = document.querySelector(".user-name");
 let getUserName = window.prompt("Enter User name: ", "Anonymous");
-if (getUserName == null || getUserName == "") {
-  userName.innerHTML = "Welcome Anonymous";
-} else {
-  userName.innerHTML = "Welcome " + getUserName;
-}
+getUserName == null || getUserName == ""
+  ? (userName.innerHTML = "Welcome Anonymous")
+  : (userName.innerHTML = "Welcome " + getUserName);
 popup.addEventListener("click", () => {
   if (count == 0) {
     inputHide.style.display = "block";
@@ -40,7 +40,7 @@ cross.addEventListener("click", () => {
   close();
 });
 gifSrc = (gif) => {
-  let currentGif = gif.src;
+  currentGif = gif.src;
   setGif.src = "";
   setGif.src = currentGif;
   countGif = 0;
@@ -50,12 +50,15 @@ let postBtn = document.querySelector(".btn-post");
 postBtn.addEventListener("click", () => {
   let postUserName = userName.innerHTML.slice(8);
   let postInput = document.querySelector(".text-area").value;
-  let postGif = setGif.src;
+  let postGif = currentGif;
   let currentDate = new Date();
   let dd = currentDate.getDate();
   let mm = currentDate.getMonth() + 1;
   let yyyy = currentDate.getFullYear();
   currentDate = dd + "/" + mm + "/" + yyyy;
+  if (postInput != "" && (postGif == "" || postGif == undefined)) {
+    none = "d-none";
+  }
   let postEle = `<div class="post-detail">
                   <div class="about-post">
                       <div class="p-flex">
@@ -69,7 +72,7 @@ postBtn.addEventListener("click", () => {
                   </div>
                   <div class="pc">
                       <p class="post-input">${postInput}</p>
-                      <div class="p-img">
+                      <div class="p-img  ${none}">
                           <img src="${postGif}"
                               alt="gif" class="p-gif">
                       </div>
@@ -78,35 +81,22 @@ postBtn.addEventListener("click", () => {
                       <i class="fa-solid fa-heart p-heart" onclick="like(this)" data-color="gray"></i>
                   </div>
                 </div>`;
-  if (postInput == "") {
-    if (
-      postGif == "" ||
-      postGif == "https://nsvenkatesh.github.io/codemancers/" ||
-      postGif == "https://nsvenkatesh.github.io/sample-post/"
-    ) {
-      alert("Invalid input");
-    } else {
-      document.querySelector(".post-data").innerHTML += postEle;
-      document.querySelector(".search").value = "";
-      close();
-    }
-  } else if (
-    postGif == "https://nsvenkatesh.github.io/codemancers/" ||
-    postGif == "" ||
-    postGif == "https://nsvenkatesh.github.io/sample-post/"
-  ) {
+  if (postInput == "" && (postGif == "" || postGif == undefined)) {
+    alert("Invalid input");
+  } else if (postInput != "" && (postGif == "" || postGif == undefined)) {
     document.querySelector(".post-data").innerHTML += postEle;
-    document.querySelector(".p-img").style.display = "none";
-    document.querySelector(".search").value = "";
     close();
+    none = "";
   } else {
     document.querySelector(".post-data").innerHTML += postEle;
-    document.querySelector(".search").value = "";
+    currentGif = "";
     close();
+    none = "";
   }
 });
 dot = (close) => {
-  close.parentElement.parentElement.remove();
+  let deletePost = confirm("Do you want to delete the post?");
+  deletePost ? close.parentElement.parentElement.remove() : null;
 };
 like = (heart) => {
   let color = heart.getAttribute("data-color");

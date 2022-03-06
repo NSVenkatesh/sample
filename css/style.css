@@ -13,6 +13,9 @@ body {
 ul {
   list-style-type: none;
 }
+.d-none {
+  display: none;
+}
 .main {
   max-width: 650px;
   margin: 0 auto;
@@ -58,7 +61,7 @@ ul {
   box-shadow: 0 0 10px rgb(114, 114, 114);
   background-color: white;
   position: absolute;
-  top: 120px;
+  top: 130px;
   width: 640px;
   display: none;
 }
