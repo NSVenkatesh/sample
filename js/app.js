@@ -114,6 +114,7 @@ close = () => {
   inputHide.style.display = "none";
   gifHide.style.display = "none";
   document.querySelector(".text-area").value = "";
+  document.querySelector(".search").value="";
   setGif.src = "";
 };
 search = (input) => {
